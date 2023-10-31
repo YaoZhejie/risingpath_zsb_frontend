@@ -119,20 +119,17 @@ export default {
       if (path === 0) {
         this.$store.commit('setIsActive', false)
         this.logout();
-      }
-      document.querySelector('.menu').classList.remove('show')
-      if (path) {
-        this.$router.push({path: path})
-      } else {
-    // 如果 path 为 falsy，则表示需要执行退出登录操作
-    // 首先将登录状态设置为 false 表示已退出登录
-    // 清空 token 和用户信息等本地存储
         localStorage.removeItem('token')
         localStorage.removeItem('userId')
         localStorage.removeItem('avator')
         localStorage.removeItem('username')
         this.$store.commit('setLoginIn', false)
         this.$router.push({path: '/'})
+        window.location.reload();
+      }
+      document.querySelector('.menu').classList.remove('show')
+      if (path) {
+        this.$router.push({path: path})
       }
     },
     collapseChange(){
